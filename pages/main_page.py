@@ -1,0 +1,39 @@
+import allure
+from selenium.common import ElementClickInterceptedException
+from selenium.webdriver.common.by import By
+from utils.enums import OrderEntryPoint
+from pages.base_page import BasePage
+from selenium.webdriver.support import expected_conditions as EC
+
+
+class MainPage(BasePage):
+
+    question_button = (By.CLASS_NAME, "accordion__button")
+    answer_panel = (By.XPATH, "//div[@class='accordion__panel']/p")
+    header_order_button = (By.XPATH, "//div[@class='Header_Nav__AGCXC']/button[text() = 'Заказать']")
+    roadmap_order_button = (By.XPATH, "//div[@class='Home_FinishButton__1_cWm']/button[text() = 'Заказать']")
+
+
+    @allure.step("Открыть вопрос")
+    def open_question_accordion(self, index):
+        question_button = self.find_element_by_index(self.question_button, index)
+        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", question_button)
+        try:
+            self.wait.until(EC.element_to_be_clickable(question_button)).click()
+        except ElementClickInterceptedException:
+            self.driver.execute_script("arguments[0].click();", question_button)
+
+    @allure.step("Получить текст ответа на вопрос")
+    def get_answer_text(self, index):
+        answer_panel = self.find_element_by_index(self.answer_panel, index)
+        answer_text = self.wait.until(EC.visibility_of(answer_panel)).text
+        return answer_text
+
+    def click_order_button(self, entry_point: OrderEntryPoint):
+        with allure.step(f"Нажать на кнопку 'Заказать' в {entry_point.description}"):
+            if entry_point == OrderEntryPoint.HEADER:
+                self.click_after_wait(self.header_order_button)
+            elif entry_point == OrderEntryPoint.ROADMAP:
+                self.click_after_wait(self.roadmap_order_button)
+            else:
+                raise ValueError(f"Неизвестная точка входа: {entry_point}")
