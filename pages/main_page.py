@@ -30,10 +30,7 @@ class MainPage(BasePage):
         return answer_text
 
     def click_order_button(self, entry_point: OrderEntryPoint):
-        with allure.step(f"Нажать на кнопку 'Заказать' в {entry_point.description}"):
-            if entry_point == OrderEntryPoint.HEADER:
-                self.click_after_wait(self.header_order_button)
-            elif entry_point == OrderEntryPoint.ROADMAP:
-                self.click_after_wait(self.roadmap_order_button)
-            else:
-                raise ValueError(f"Неизвестная точка входа: {entry_point}")
+        with allure.step(f"Нажать на кнопку 'Заказать' {entry_point.value}"):
+            locator = getattr(self, entry_point.locator_name)
+            self.click_after_wait(locator)
+

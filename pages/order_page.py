@@ -46,13 +46,9 @@ class OrderPage(BasePage):
         self.fill_input(self.comment_input, rent_data.comment)
 
     def choose_color(self, color: ScooterColor):
-        with allure.step(f"Выбрать цвет самоката: {color.description}"):
-            if color == ScooterColor.BLACK:
-                self.click_after_wait(self.color_checkbox_black)
-            elif color == ScooterColor.GREY:
-                self.click_after_wait(self.color_checkbox_grey)
-            else:
-                raise ValueError(f"Неизвестный цвет самоката: {color}")
+        with allure.step(f"Выбрать цвет самоката: {color.value}"):
+            locator = getattr(self, color.locator_name)
+            self.click_after_wait(locator)
 
     @allure.step("Нажать кнопку 'Заказать' на форме 'Про аренду'")
     def click_order_button(self):
