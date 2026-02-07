@@ -17,20 +17,19 @@ class MainPage(BasePage):
     @allure.step("Открыть вопрос")
     def open_question_accordion(self, index):
         question_button = self.find_element_by_index(self.question_button, index)
-        self.driver.execute_script("arguments[0].scrollIntoView({block: 'center'});", question_button)
+        self.scroll_to_element(question_button)
         try:
-            self.wait.until(EC.element_to_be_clickable(question_button)).click()
+            self.click_after_wait(question_button)
         except ElementClickInterceptedException:
-            self.driver.execute_script("arguments[0].click();", question_button)
+            self.click_with_js(question_button)
 
     @allure.step("Получить текст ответа на вопрос")
     def get_answer_text(self, index):
         answer_panel = self.find_element_by_index(self.answer_panel, index)
-        answer_text = self.wait.until(EC.visibility_of(answer_panel)).text
+        answer_text = self.wait_for_visibility_of(answer_panel).text
         return answer_text
 
     def click_order_button(self, entry_point: OrderEntryPoint):
         with allure.step(f"Нажать на кнопку 'Заказать' {entry_point.value}"):
             locator = getattr(self, entry_point.locator_name)
             self.click_after_wait(locator)
-
