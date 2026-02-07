@@ -1,18 +1,11 @@
 import allure
 from selenium.common import ElementClickInterceptedException
-from selenium.webdriver.common.by import By
+from locators.main_page_locators import MainPageLocators
 from utils.enums import OrderEntryPoint
 from pages.base_page import BasePage
-from selenium.webdriver.support import expected_conditions as EC
 
 
-class MainPage(BasePage):
-
-    question_button = (By.CLASS_NAME, "accordion__button")
-    answer_panel = (By.XPATH, "//div[@class='accordion__panel']/p")
-    header_order_button = (By.XPATH, "//div[@class='Header_Nav__AGCXC']/button[text() = 'Заказать']")
-    roadmap_order_button = (By.XPATH, "//div[@class='Home_FinishButton__1_cWm']/button[text() = 'Заказать']")
-
+class MainPage(BasePage, MainPageLocators):
 
     @allure.step("Открыть вопрос")
     def open_question_accordion(self, index):

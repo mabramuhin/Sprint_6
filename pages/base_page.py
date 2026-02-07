@@ -1,15 +1,11 @@
 import allure
-from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from locators.base_page_locators import BasePageLocators
 from utils.urls import DZEN_URL
 
 
-class BasePage:
-
-    cookie_button = (By.CLASS_NAME, "App_CookieButton__3cvqF")
-    scooter_logo = (By.CLASS_NAME, "Header_LogoScooter__3lsAR")
-    yandex_logo = (By.CLASS_NAME, "Header_LogoYandex__3TSOI")
+class BasePage(BasePageLocators):
 
     def __init__(self, driver, timeout=10):
         self.driver = driver
