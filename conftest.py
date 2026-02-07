@@ -2,7 +2,7 @@ import pytest
 from selenium import webdriver
 
 from pages.main_page import MainPage
-from utils.constants import MAIN_PAGE_URL
+from utils.urls import MAIN_PAGE_URL
 
 
 @pytest.fixture

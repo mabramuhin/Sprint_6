@@ -5,7 +5,7 @@ from utils.enums import OrderEntryPoint
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from utils.test_data import HEADER_ORDER_DATA, ROADMAP_ORDER_DATA, OrderData
-from utils.constants import MAIN_PAGE_URL, DZEN_URL
+from utils.urls import MAIN_PAGE_URL, DZEN_URL
 
 
 class TestOrderPage:

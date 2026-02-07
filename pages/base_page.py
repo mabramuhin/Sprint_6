@@ -2,7 +2,7 @@ import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from utils.constants import DZEN_URL
+from utils.urls import DZEN_URL
 
 
 class BasePage:
