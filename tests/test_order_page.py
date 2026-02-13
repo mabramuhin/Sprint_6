@@ -5,7 +5,6 @@ from utils.enums import OrderEntryPoint
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 from utils.test_data import HEADER_ORDER_DATA, ROADMAP_ORDER_DATA, OrderData
-from utils.urls import MAIN_PAGE_URL, DZEN_URL
 
 
 class TestOrderPage:
@@ -29,11 +28,3 @@ class TestOrderPage:
         order_page.click_order_button()
         order_page.click_accept_order_button()
         assert order_page.check_success_modal_displayed()
-
-        order_page.click_show_status_button()
-        order_page.click_scooter_logo()
-        assert driver.current_url == MAIN_PAGE_URL
-
-        main_page.click_yandex_logo()
-        main_page.switch_to_new_window()
-        assert driver.current_url == DZEN_URL

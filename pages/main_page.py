@@ -26,3 +26,7 @@ class MainPage(BasePage, MainPageLocators):
         with allure.step(f"Нажать на кнопку 'Заказать' {entry_point.value}"):
             locator = getattr(self, entry_point.locator_name)
             self.click_after_wait(locator)
+
+    @allure.step("Подтвердить куки")
+    def click_cookie_button(self):
+        self.click_after_wait(self.cookie_button)
